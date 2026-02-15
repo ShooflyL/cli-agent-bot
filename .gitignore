@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Configuration
+config.yaml
+config.local.yaml
+
+# Logs
+*.log
+logs/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local
+
+# Windows specific
+/nul
+# claude settings
+.claude/
+# .md files
+*.md
+!README.md
+# .yaml files
+*.yaml
+!config.example.yaml

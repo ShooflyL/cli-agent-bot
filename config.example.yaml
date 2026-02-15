@@ -1,0 +1,91 @@
+# ============================================================
+# cli-agent-bot 配置文件示例
+# 复制此文件为 config.yaml 并填入实际配置
+# cp config.example.yaml config.yaml
+# ============================================================
+
+# IM 适配器配置
+im:
+  # 默认 IM 平台（目前支持 feishu）
+  default: "feishu"
+  feishu:
+    # 飞书应用的 App ID（在飞书开放平台 -> 凭证与基础信息中获取）
+    appId: "cli_xxxxxxxxxxxxxxxx"
+    # 飞书应用的 App Secret
+    appSecret: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    # 加密密钥（可选，在飞书开放平台 -> 事件订阅中设置）
+    encryptKey: ""
+    # 验证令牌（可选）
+    verificationToken: ""
+    # 连接模式：
+    #   webhook  - 需要公网可访问的 URL，适合有服务器或使用 ngrok 的场景
+    #   longpoll - 长连接模式，无需公网 IP，适合本地开发（需要飞书企业版）
+    mode: "webhook"
+    # Webhook 模式下的监听端口
+    webhookPort: 9999
+
+# CLI 工具配置
+cli:
+  # 默认 CLI 工具（claude 或 opencode）
+  default: "claude"
+  # 默认工作目录（会话创建时的基准路径）
+  defaultWorkdir: "D:/Projects/"
+  # Claude Code 配置
+  claude:
+    executable: "claude"
+  # OpenCode 配置
+  opencode:
+    executable: "opencode"
+  # 跳过权限确认（启用后 Claude Code 不会弹出操作确认）
+  # 注意：仅在受信任的环境中使用
+  skipPermissions: false
+  # 消息过滤：包含以下字符串的 CLI 输出将被过滤，不推送到 IM
+  messageFilters:
+    - "◯ /ide for Visual Studio Code"
+    - "Claude Code has switched from npm to native installer"
+
+# 安全配置
+security:
+  # 白名单模式：
+  #   none - 不启用白名单（任何人都可以使用）
+  #   user - 仅限用户白名单
+  #   chat - 仅限群聊白名单
+  #   both - 同时启用用户和群聊白名单
+  mode: "both"
+  # 用户白名单（飞书用户 open_id）
+  userWhitelist:
+    - "ou_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  # 群聊白名单（飞书群聊 chat_id）
+  chatWhitelist:
+    - "oc_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+# 日志配置
+logging:
+  # 日志级别：debug, info, warn, error
+  level: "info"
+  # 日志文件路径（留空则不写文件）
+  file: ""
+  # 是否输出到控制台
+  console: true
+
+# 会话配置
+session:
+  # 最大并发会话数
+  maxSessions: 10
+  # 输出缓冲区大小（字节）
+  bufferSize: 65536
+  # 输出轮询间隔（毫秒）
+  pollInterval: 500
+  # 消息过滤配置
+  messageFilter:
+    # 是否启用消息过滤
+    enabled: true
+    # 最小消息长度（低于此长度的输出将被忽略）
+    minLength: 5
+
+# Web UI 配置
+webUI:
+  # 是否启用 Web 管理界面
+  enabled: true
+  # Web UI 监听端口
+  port: 9998
